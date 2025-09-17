@@ -8,6 +8,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Root route for testing
+app.get('/', (req, res) => {
+  res.json({ status: 'Backend is running' });
+});
+
 // Create transporter for Gmail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
