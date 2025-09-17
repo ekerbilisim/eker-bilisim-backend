@@ -33,7 +33,7 @@ app.post('/send-notify-email', async (req, res) => {
   try {
     // Send email to ugure47@gmail.com
     const mailOptions = {
-      from: process.env.GMAIL_USER || 'your-gmail@gmail.com',
+      from: process.env.GMAIL_USER,
       to: 'ugure47@gmail.com',
       subject: 'New Subscription Notification',
       text: `A new user has subscribed with email: ${userEmail}`
