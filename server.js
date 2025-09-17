@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = 3001;
-
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,20 +14,6 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASS
-  }
-});
-
-// Test sending email on server start to verify SMTP config
-transporter.sendMail({
-  from: process.env.GMAIL_USER,
-  to: 'ugure47@gmail.com',
-  subject: 'Test Email from Notify Backend',
-  text: 'This is a test email sent on server start to verify SMTP configuration.'
-}, (err, info) => {
-  if (err) {
-    console.error('Test email failed:', err);
-  } else {
-    console.log('Test email sent:', info.response);
   }
 });
 
@@ -65,6 +49,5 @@ app.post('/send-notify-email', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Notify email backend listening at http://localhost:${port}`);
-});
+// Export for Vercel serverless function
+module.exports = app;
